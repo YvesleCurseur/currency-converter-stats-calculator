@@ -1,29 +1,30 @@
-{% extends "base.html" %}
-{% block title %}Converter{% endblock %}
-{% block head %}
-  {{ super() }}
-  <style type="text/css">
-    .important { color: #336699; }
-  </style>
-{% endblock %}
-{% block content %}
+{% extends "base.html" %} {% block title %}Converter{% endblock %} {% block head
+%} {{ super() }}
+<style type="text/css">
+  .important {
+    color: #336699;
+  }
+</style>
+{% endblock %} {% block content %}
 <h1>Convertisseur de devises</h1>
 <form action="/convert" method="POST">
   <input type="text" name="amount" placeholder="Montant" />
   From
   <select name="from_currency">
-    <option value="USD">USD</option>
-    <option value="EUR">EUR</option>
-    <!-- Ajoutez les autres devises ici -->
+    <option value="" selected disabled>Select a code</option>
+    {% for code in codes %}
+    <option value="{{ code }}">{{ code }}</option>
+    {% endfor %}
   </select>
   To
   <select name="to_currency">
-    <!-- Ajout du champ de sélection de la devise de destination -->
-    <option value="XOF">XOF</option>
-    <!-- Nous convertissons toujours vers XOF dans l'exemple -->
-    <!-- Ajoutez les autres devises ici -->
+    <option value="" selected disabled>Select a code</option>
+    {% for code in codes %}
+    <option value="{{ code }}">{{ code }}</option>
+    {% endfor %}
   </select>
   <button type="submit">Convertir</button>
 </form>
 
-{% endblock %}
+{% if result %} {{ result }} {{ result.conversion_result }} {% endif %} {%
+endblock %}

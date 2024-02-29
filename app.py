@@ -1,23 +1,22 @@
 import os
 
 # flask import
-from flask import Flask, render_template, request
+from flask import render_template, request
+from config import app
 
 # env config
 from dotenv import load_dotenv
 
-import requests
-
-app = Flask(__name__)
-
-# Loading env variables
 load_dotenv()
 
-RAPIDAPI_CURRENCY_CONVERT_URL = os.getenv("RAPIDAPI_CURRENCY_CONVERT_URL")
-RAPIDAPI_CURRENCY_CONVERT_HOST = os.getenv("RAPIDAPI_CURRENCY_CONVERT_HOST")
-RAPIDAPI_CURRENCY_CONVERT_API_KEY = os.getenv("RAPIDAPI_CURRENCY_CONVERT_API_KEY")
+# db import
+from models import Currency, list_currency_codes
 
-print(RAPIDAPI_CURRENCY_CONVERT_URL)
+import requests
+
+# Loading env variables
+EXCHANGE_URL = os.getenv("EXCHANGE_URL")
+EXCHANGE_API_KEY = os.getenv("EXCHANGE_API_KEY")
 
 
 # ===============================================================
@@ -25,12 +24,16 @@ print(RAPIDAPI_CURRENCY_CONVERT_URL)
 # ===============================================================
 @app.route("/")
 def index():
-    return render_template("convert.html")
+    codes = list_currency_codes()
+    return render_template("convert.html", codes=codes)
 
 
 # Route pour gérer la conversion de devises
 @app.route("/convert", methods=["POST"])
 def convert():
+    # RECUPERATION DES DONNEES
+    codes = None
+    codes = list_currency_codes()
     amount_str = request.form.get("amount")
     if not amount_str:
         return (
@@ -39,6 +42,7 @@ def convert():
         )  # Retourne une réponse d'erreur 400 Bad Request si le montant est vide
 
     try:
+        # AMOUNT variable (decimal format xxxx.xxxx).
         amount = float(amount_str)
     except ValueError:
         return (
@@ -49,19 +53,18 @@ def convert():
     to_currency = request.form.get("to_currency")
     from_currency = request.form.get("from_currency")
 
-    querystring = {"from_amount": amount, "from": from_currency, "to": to_currency}
-
-    headers = {
-        "x-rapidapi-host": RAPIDAPI_CURRENCY_CONVERT_HOST,
-        "x-rapidapi-key": RAPIDAPI_CURRENCY_CONVERT_API_KEY,
-    }
+    # Here is the endpoint i have to create https://v6.exchangerate-api.com/v6/9328d7790738eab570d5c8a4/pair/EUR/GBP/50
 
     response = requests.get(
-        url=RAPIDAPI_CURRENCY_CONVERT_URL,
-        headers=headers,
-        params=querystring,
+        f"{EXCHANGE_URL}/{EXCHANGE_API_KEY}/pair/{from_currency}/{to_currency}/{amount}"
     )
-    result = response.json()
-    print(result)
 
-    return render_template("convert.html", result=result)
+    if response.status_code != 200:
+        return (
+            "Une erreur s'est produite lors de la conversion. Veuillez réessayer.",
+            response.status_code,  # Include the status code
+        )
+
+    result = response.json()
+
+    return render_template("convert.html", result=result, codes=codes)
