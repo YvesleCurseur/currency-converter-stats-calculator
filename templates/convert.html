@@ -13,14 +13,14 @@
   <select name="from_currency">
     <option value="" selected disabled>Select a code</option>
     {% for code in codes %}
-    <option value="{{ code }}">{{ code }}</option>
+    <option value="{{ code.code }}">{{ code }}</option>
     {% endfor %}
   </select>
   To
   <select name="to_currency">
-    <option value="" selected disabled>Select a code</option>
+    <option value="XOF">XOF - West African CFA franc</option>
     {% for code in codes %}
-    <option value="{{ code }}">{{ code }}</option>
+    <option value="{{ code.code }}">{{ code }}</option>
     {% endfor %}
   </select>
   <button type="submit">Convertir</button>

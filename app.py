@@ -11,6 +11,7 @@ load_dotenv()
 
 # db import
 from models import Currency, list_currency_codes
+from utils.currency_codes import statistical_calculations
 
 import requests
 
@@ -25,6 +26,7 @@ EXCHANGE_API_KEY = os.getenv("EXCHANGE_API_KEY")
 @app.route("/")
 def index():
     codes = list_currency_codes()
+    print(codes)
     return render_template("convert.html", codes=codes)
 
 
@@ -34,6 +36,7 @@ def convert():
     # RECUPERATION DES DONNEES
     codes = None
     codes = list_currency_codes()
+
     amount_str = request.form.get("amount")
     if not amount_str:
         return (
@@ -67,4 +70,27 @@ def convert():
 
     result = response.json()
 
+    # average, standard_deviation, maximum, minimum = statistical_calculations(result.result.conversion_result)
+
+    # print(average, standard_deviation, maximum, minimum)
+
+    results = result.get("result", {})
+
+    # Assurez-vous que les données de conversion existent dans le résultat
+    if "conversion_result" in results:
+        conversion_result = float(results["conversion_result"])
+        average, standard_deviation, maximum, minimum = statistical_calculations(
+            conversion_result
+        )
+        print(average, standard_deviation, maximum, minimum)
+
     return render_template("convert.html", result=result, codes=codes)
+
+
+@app.route("/about", methods=["GET"])
+def about():
+    average, standard_deviation, maximum, minimum = statistical_calculations(
+        float(10.00)
+    )
+    print(average, standard_deviation, maximum, minimum)
+    return render_template("about.html")

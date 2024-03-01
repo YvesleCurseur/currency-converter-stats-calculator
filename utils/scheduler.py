@@ -13,7 +13,7 @@ from flask import current_app
 
 def update_every_second(app):
     with app.app_context():  # Utilisez app.app_context() pour accéder au contexte de l'application Flask
-        from database.requests import add_currency_data  # Importez add_currency_data à l'intérieur de la fonction
+        from models import add_currency_data  # Importez add_currency_data à l'intérieur de la fonction
         add_currency_data()
 
 def run_scheduler(app):  # Acceptez l'instance de l'application Flask comme argument

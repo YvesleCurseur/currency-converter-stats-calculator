@@ -5,3 +5,5 @@ Web Application to Convert Currencies and Perform Calculations Statistics
 - [ ] Make a better presentation of the project / Documentation
 - [ ] Continue working on the project
 - [ ] Tailwind setup
+
+https://www.exchangerate-api.com/docs/supported-codes-endpoint
