@@ -1,0 +1,16 @@
+{% extends "base.html" %} {% block title %} Statistics {% endblock %} {% block
+head %} {{ super() }}
+<style type="text/css">
+  .important {
+    color: #336699;
+  }
+</style>
+{% endblock %} {% block content %}
+<h1>Statistics</h1>
+<form action="/statistics" method="POST">
+  <input type="text" name="currency_code" placeholder="Enter your currency" />
+  <button type="submit">Retreive</button>
+</form>
+
+{% if result %} {{ result }} {% endif %} {%
+endblock %}

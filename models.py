@@ -3,7 +3,6 @@ from config import app
 from flask_sqlalchemy import SQLAlchemy
 from utils.currency_codes import get_currency_codes
 
-
 db = SQLAlchemy()
 
 db.init_app(app)  # Initialisez db après avoir créé l'application Flask
@@ -40,12 +39,28 @@ def list_currency_codes():
     code = Currency.query.order_by(Currency.id).all()
     return code
 
-class Convertion(db.Model):
-    __tablename__ = "convertions"
+class CurrencyConversion(db.Model):
+    __tablename__ = "currency_conversions"
     id = db.Column(db.Integer, primary_key=True)
-    from_currency = db.Column(db.String(3), nullable=False)
-    to_currency = db.Column(db.String(3), nullable=False)
-    
+    from_amount = db.Column(db.Float, nullable=False)
+    base_code = db.Column(db.String(3), nullable=False)
+    target_code = db.Column(db.String(3), nullable=False)
+    conversion_rate = db.Column(db.Float, nullable=False)
+    conversion_result = db.Column(db.Float, nullable=False)
+
+    def __repr__(self):
+        return f"<CurrencyConversion {self.base_code} to {self.target_code}>"
+
+def add_currency_conversion_data(data):
+    currency_conversion = CurrencyConversion(
+        base_code=data["base_code"],
+        target_code=data["target_code"],
+        from_amount=data["from_amount"],
+        conversion_rate=data["conversion_rate"],
+        conversion_result=data["conversion_result"]
+    )
+    db.session.add(currency_conversion)
+    db.session.commit()
 
 with app.app_context():
     if not os.path.exists("currency_data.db"):
