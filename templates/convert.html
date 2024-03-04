@@ -1,30 +1,52 @@
-{% extends "base.html" %} {% block title %}Converter{% endblock %} {% block head
-%} {{ super() }}
-<style type="text/css">
-  .important {
-    color: #336699;
-  }
-</style>
-{% endblock %} {% block content %}
-<h1>Convertisseur de devises</h1>
-<form action="/convert" method="POST">
-  <input type="text" name="amount" placeholder="Montant" />
+{% extends "base.html" %}
+
+{% block title %}Currency Converter{% endblock %}
+
+{% block content %}
+<h1 class="text-3xl font-bold mb-4 text-center">Currency Converter</h1>
+
+<form action="/convert" method="POST" class="mb-4 flex flex-col w-1/2">
+  <input
+    type="text"
+    name="amount"
+    placeholder="Amount"
+    class="px-2 py-1 border border-gray-300 rounded-md mr-2 mt-5 mb-5"
+  />
   From
-  <select name="from_currency">
-    <option value="" selected disabled>Select a code</option>
+  <select
+    name="from_currency"
+    class="px-2 py-1 border border-gray-300 rounded-md mr-2 mt-5 mb-5"
+  >
+    <option value="" selected disabled>Select a currency</option>
     {% for code in codes %}
     <option value="{{ code.code }}">{{ code }}</option>
     {% endfor %}
   </select>
   To
-  <select name="to_currency">
+  <select
+    name="to_currency"
+    class="px-2 py-1 border border-gray-300 rounded-md mr-2 mt-5 mb-5"
+  >
     <option value="XOF">XOF - West African CFA franc</option>
     {% for code in codes %}
     <option value="{{ code.code }}">{{ code }}</option>
     {% endfor %}
   </select>
-  <button type="submit">Convertir</button>
+  <button
+    type="submit"
+    class="px-4 py-2 bg-blue-500 text-white rounded-md mt-5 w-1/2"
+  >
+    Convert
+  </button>
 </form>
 
-{% if result %} {{ result }} {{ result.conversion_result }} {% endif %} {%
-endblock %}
+{% if result %}
+<p class="mb-4">
+  The conversion from {{ result.from_amount }} {{ result.base_code }} to {{
+  result.target_code }} is {{ result.conversion_result }} {{
+  result.target_code }}
+</p>
+
+<p>Rate: {{ result.conversion_rate }}</p>
+{% endif %}
+{% endblock %}

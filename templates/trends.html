@@ -12,10 +12,9 @@
 {% endblock %}
 
 {% block content %}
-  <h1>List of All Your Conversions</h1>
 
   {% if trends %}
-    <h2>Trends</h2>
+    <h2 class="text-2xl font-bold mb-2">Trends</h2>
     <ul>
       {% for currency_code, trend in trends.items() %}
         <li>{{ currency_code }}: {{ trend }}</li>
@@ -26,10 +25,11 @@
   {% endif %}
 
   {% if currency_comparison_stats %}
-    <h2>Currency Comparison Statistics</h2>
+    <h2 class="text-2xl font-bold mb-2">Currency Comparison Statistics</h2>
     <ul>
       {% for currency_code, stats in currency_comparison_stats.items() %}
-        <li>{{ currency_code }}:
+        <li>
+          <p class="font-bold">{{ currency_code }}:</p>
           <ul>
             <li>Mean: {{ stats.mean }} - Average value of all converted amounts for {{ currency_code }}.</li>
             <li>Standard Deviation: {{ stats.standard_deviation }} - Measure of the amount of variation or dispersion of values for {{ currency_code }}.</li>
@@ -44,7 +44,7 @@
   {% endif %}
 
   {% if average_conversion_amounts %}
-    <h2>Average Conversion Amounts</h2>
+    <h2 class="text-2xl font-bold mb-2">Average Conversion Amounts</h2>
     <ul>
       {% for currency_code, amount in average_conversion_amounts.items() %}
         <li>{{ currency_code }}: {{ amount }} - Average amount of conversions for {{ currency_code }}.</li>

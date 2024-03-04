@@ -32,7 +32,6 @@ EXCHANGE_API_KEY = os.getenv("EXCHANGE_API_KEY")
 @app.route("/")
 def index():
     codes = list_currency_codes()
-    print(codes)
     return render_template("base.html", codes=codes)
 
 @app.route("/convert", methods=["GET"])

@@ -1,33 +1,30 @@
 {% extends "base.html" %} {% block title %}Conversions{% endblock %} {% block
-head %} {{ super() }}
-<style type="text/css">
-  .important {
-    color: #336699;
-  }
-</style>
-{% endblock %} {% block content %}
-<h1>List of All Your Conversions</h1>
+content %}
 
-<table>
-  <thead>
-    <tr>
-      <th>From Amount</th>
-      <th>|</th>
-      <th>To</th>
-      <th>|</th>
-      <th>Rate</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for conversion in conversions %}
-    <tr>
-      <td>{{ conversion.from_amount }}</td>
-      <td>{{ conversion.base_code }}</td>
-      <td>{{ conversion.conversion_result }}</td>
-      <td>{{ conversion.target_code }}</td>
-      <td>{{ conversion.conversion_rate }}</td>
-    </tr>
-    {% endfor %}
-  </tbody>
+<h1 class="text-3xl font-bold mb-4 text-center">List of All Your Conversions</h1>
+  <div class="flex justify-center">
+    <table class="border-collapse border border-gray-200">
+      <thead class="bg-gray-100">
+        <tr>
+          <th class="px-4 py-2">From Amount</th>
+          <th class="px-4 py-2">|</th>
+          <th class="px-4 py-2">To Amount</th>
+          <th class="px-4 py-2">|</th>
+          <th class="px-4 py-2">Rate</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for conversion in conversions %}
+        <tr>
+          <td class="px-4 py-2">{{ conversion.from_amount }}</td>
+          <td class="px-4 py-2">{{ conversion.base_code }}</td>
+          <td class="px-4 py-2">{{ conversion.conversion_result }}</td>
+          <td class="px-4 py-2">{{ conversion.target_code }}</td>
+          <td class="px-4 py-2">{{ conversion.conversion_rate }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </div>
 </table>
+
 {% endblock %}

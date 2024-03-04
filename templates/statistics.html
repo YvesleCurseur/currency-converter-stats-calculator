@@ -1,4 +1,4 @@
-{% extends "base.html" %} {% block title %} Statistics {% endblock %} {% block
+{% extends "base.html" %} {% block title %}Statistics{% endblock %} {% block
 head %} {{ super() }}
 <style type="text/css">
   .important {
@@ -6,43 +6,60 @@ head %} {{ super() }}
   }
 </style>
 {% endblock %} {% block content %}
-<h1>Statistics base on the amount and currency code</h1>
+<h1 class="text-3xl font-bold mb-4">
+  Statistics based on the amount and currency code
+</h1>
 <p>
   Enter the currency code of the amount converted to get the Mean, Standard
-  Deviation, Maximum and Minimum
+  Deviation, Maximum, and Minimum
 </p>
-<form action="/statistics" method="POST">
-  <input type="text" name="currency_code" placeholder="Enter your currency" />
-  <button type="submit">Retreive</button>
+<form action="/statistics" method="POST" class="mb-4">
+  <input
+    type="text"
+    name="currency_code"
+    placeholder="Enter your currency"
+    class="px-2 py-1 border border-gray-300 rounded-md mr-2 mb-2"
+  />
+  <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-md">
+    Retrieve
+  </button>
 </form>
 
-<p>List of conversions avalaible</p>
+{% if stats %}
+<p>Code: {{ stats.currency_code }}</p>
+<p>Mean: {{ stats.mean }}</p>
+<p>Standard Deviation: {{ stats.standard_deviation }}</p>
+<p>Maximum: {{ stats.maximum }}</p>
+<p>Minimum: {{ stats.minimum }}</p>
+{% endif %}
 
-<table>
-  <thead>
+<br />
+
+<p>List of available conversions</p>
+
+<table class="border-collapse border border-gray-200">
+  <thead class="bg-gray-100">
     <tr>
-      <th>From Amount</th>
-      <th>|</th>
-      <th>To</th>
-      <th>|</th>
-      <th>Rate</th>
+      <th class="px-4 py-2">From Amount</th>
+      <th class="px-4 py-2">|</th>
+      <th class="px-4 py-2">To Amount</th>
+      <th class="px-4 py-2">|</th>
+      <th class="px-4 py-2">Rate</th>
     </tr>
   </thead>
   <tbody>
     {% for conversion in conversions %}
     <tr>
-      <td>{{ conversion.from_amount }}</td>
-      <td>{{ conversion.base_code }}</td>
-      <td>{{ conversion.conversion_result }}</td>
-      <td>{{ conversion.target_code }}</td>
-      <td>{{ conversion.conversion_rate }}</td>
+      <td class="px-4 py-2">{{ conversion.from_amount }}</td>
+      <td class="px-4 py-2">{{ conversion.base_code }}</td>
+      <td class="px-4 py-2">{{ conversion.conversion_result }}</td>
+      <td class="px-4 py-2">{{ conversion.target_code }}</td>
+      <td class="px-4 py-2">{{ conversion.conversion_rate }}</td>
     </tr>
     {% endfor %}
   </tbody>
 </table>
 
-<br>
+<br />
 
-{% if stats %} Code : {{ stats.currency_code }} <br> Mean : {{ stats.mean }} <br> Standard
-Deviation : {{ stats.standard_deviation }} <br> Maximum : {{ stats.maximum }} <br> Minimum
-: {{ stats.minimum }} {% endif %} {% endblock %}
+{% endblock %}

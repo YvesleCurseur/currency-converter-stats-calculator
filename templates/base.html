@@ -1,40 +1,80 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    {% block head %}
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='style.css') }}"
-    />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
       {% block title %} Home {% endblock %} - Currency Converter Stats
       Calculator
     </title>
-    {% endblock %}
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="{{url_for('static',filename='css/output.css')}}"
+    />
+    {% block head %}{% endblock %}
   </head>
-  <body>
-    <div id="content">
+  <body class="bg-gray-100 font-sans">
+    <div class="container mx-auto p-8">
+      <h1 class="text-5xl font-bold mb-8 text-center">
+        <a href="/" class="text-blue-500 hover:underline">
+        Currency Converter Stats Calculator
+        </a>
+      </h1>
       {% block content %}
-      <h1>Currency Converter Stats Calculator</h1>
-      <a href="/convert">Converter</a>
-      <p>Convert currencies for various transactions.</p>
-      <a href="/conversions">Conversions</a>
-      <p>View the list of all your conversions.</p>
-      <a href="/statistics">Statistics</a>
-      <p>
-        Access to standard deviation, average, maximum and minimum of all your
-        conversions.
-      </p>
-      <a href="/trends">Trends</a>
-      <p>Currency market trends base on all your conversions.</p>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="p-4 bg-white rounded-lg shadow">
+          <h2 class="text-3xl font-bold mb-4">Convert currencies</h2>
+          <p class="text-lg mb-4">
+            Convert currencies for various transactions.
+          </p>
+          <a href="/convert" class="text-blue-500 hover:underline"
+            >Go to Converter</a
+          >
+        </div>
+        <div class="p-4 bg-white rounded-lg shadow">
+          <h2 class="text-3xl font-bold mb-4">View conversions</h2>
+          <p class="text-lg mb-4">View the list of all your conversions.</p>
+          <a href="/conversions" class="text-blue-500 hover:underline"
+            >Go to Conversions</a
+          >
+        </div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8">
+        <div class="p-4 bg-white rounded-lg shadow">
+          <h2 class="text-3xl font-bold mb-4">Statistics</h2>
+          <p class="text-lg mb-4">
+            Access standard deviation, average, maximum and minimum of all your
+            conversions.
+          </p>
+          <a href="/statistics" class="text-blue-500 hover:underline"
+            >Go to Statistics</a
+          >
+        </div>
+        <div class="p-4 bg-white rounded-lg shadow">
+          <h2 class="text-3xl font-bold mb-4">Trends</h2>
+          <p class="text-lg mb-4">
+            Currency market trends based on all your conversions.
+          </p>
+          <a href="/trends" class="text-blue-500 hover:underline"
+            >Go to Trends</a
+          >
+        </div>
+      </div>
       {% endblock %}
     </div>
-    <br>
-    <div id="footer">
-      {% block footer %} &copy; Copyright 2024 by
-      <a href="http://domain.invalid/">Fulbert Pognon</a>. {% endblock %}
-    </div>
+
+    <footer class="text-center py-4 mt-8">
+      {% block footer %} &copy; By
+      <a
+        href="https://github.com/YvesleCurseur"
+        target="_blank"
+        class="text-blue-500 hover:underline"
+        >Fulbert Pognon</a
+      >. {% endblock %}
+    </footer>
   </body>
 </html>
