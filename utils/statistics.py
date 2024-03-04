@@ -69,9 +69,9 @@ def calculate_average_conversion_amounts_by_currency():
             # Déterminer la tendance
             if len(converted_amounts) >= 2:
                 if converted_amounts[-1] > converted_amounts[-2]:
-                    trend_messages[currency_code] = "Hausse"
+                    trend_messages[currency_code] = "Rise"
                 elif converted_amounts[-1] < converted_amounts[-2]:
-                    trend_messages[currency_code] = "Baisse"
+                    trend_messages[currency_code] = "Drop"
                 else:
                     trend_messages[currency_code] = "Stable"
             else:

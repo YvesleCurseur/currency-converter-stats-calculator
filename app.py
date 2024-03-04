@@ -10,8 +10,14 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # db import
-from models import list_currency_codes, add_currency_conversion_data
-from utils.statistics import calculate_statistics_for_currency, compare_statistics_for_currencies, calculate_average_conversion_amounts_by_currency
+from models import (
+    list_currency_codes, 
+    add_currency_conversion_data, 
+    list_currency_conversions)
+from utils.statistics import (
+    calculate_statistics_for_currency, 
+    compare_statistics_for_currencies, 
+    calculate_average_conversion_amounts_by_currency)
 
 import requests
 
@@ -33,6 +39,11 @@ def index():
 def show_convert_form():
     codes = list_currency_codes()
     return render_template("convert.html", codes=codes)
+
+@app.route("/conversions", methods=["GET"])
+def convertions():
+    conversions = list_currency_conversions()
+    return render_template("conversions.html", conversions=conversions)
 
 # Route pour gérer la conversion de devises
 @app.route("/convert", methods=["GET", "POST"])
@@ -60,8 +71,6 @@ def convert():
     to_currency = request.form.get("to_currency")
     from_currency = request.form.get("from_currency")
 
-    # Here is the endpoint i have to create https://v6.exchangerate-api.com/v6/9328d7790738eab570d5c8a4/pair/EUR/GBP/50
-
     response = requests.get(
         f"{EXCHANGE_URL}/{EXCHANGE_API_KEY}/pair/{from_currency}/{to_currency}/{amount}"
     )
@@ -83,19 +92,18 @@ def convert():
 
 
 # Route pour les statistiques
-@app.route("/statistics", methods=["POST"])
+@app.route("/statistics", methods=["POST", "GET"])
 def statistics():
 
     currency_code = request.form.get("currency_code")
+    conversions = list_currency_conversions()
     stats = calculate_statistics_for_currency(currency_code)
 
-    return render_template("statistics.html", result=stats)
+    return render_template("statistics.html", stats=stats, conversions=conversions)
 
 
 @app.route("/trends", methods=["GET"])
 def trends():
-    stats_XOF = calculate_statistics_for_currency("XOF")
-    print("Statistics for XOF:", stats_XOF)
 
     # Exemple d'utilisation : Comparer les statistiques des différentes devises
     currency_comparison_stats = compare_statistics_for_currencies()
@@ -112,7 +120,7 @@ def trends():
     for currency_code, trend in trend_messages.items():
         print(f"- {currency_code} : {trend}")
 
-    return render_template("about.html")
+    return render_template("trends.html", trends=trend_messages, currency_comparison_stats=currency_comparison_stats, average_conversion_amounts=average_conversion_amounts)
 
 
 # Statistics for XOF: {'currency_code': 'XOF', 'mean': 363606.78, 'standard_deviation': 363421.62, 'maximum': 727028.4, 'minimum': 185.16}   

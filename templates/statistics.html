@@ -6,11 +6,43 @@ head %} {{ super() }}
   }
 </style>
 {% endblock %} {% block content %}
-<h1>Statistics</h1>
+<h1>Statistics base on the amount and currency code</h1>
+<p>
+  Enter the currency code of the amount converted to get the Mean, Standard
+  Deviation, Maximum and Minimum
+</p>
 <form action="/statistics" method="POST">
   <input type="text" name="currency_code" placeholder="Enter your currency" />
   <button type="submit">Retreive</button>
 </form>
 
-{% if result %} {{ result }} {% endif %} {%
-endblock %}
+<p>List of conversions avalaible</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>From Amount</th>
+      <th>|</th>
+      <th>To</th>
+      <th>|</th>
+      <th>Rate</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for conversion in conversions %}
+    <tr>
+      <td>{{ conversion.from_amount }}</td>
+      <td>{{ conversion.base_code }}</td>
+      <td>{{ conversion.conversion_result }}</td>
+      <td>{{ conversion.target_code }}</td>
+      <td>{{ conversion.conversion_rate }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<br>
+
+{% if stats %} Code : {{ stats.currency_code }} <br> Mean : {{ stats.mean }} <br> Standard
+Deviation : {{ stats.standard_deviation }} <br> Maximum : {{ stats.maximum }} <br> Minimum
+: {{ stats.minimum }} {% endif %} {% endblock %}

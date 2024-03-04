@@ -62,6 +62,12 @@ def add_currency_conversion_data(data):
     db.session.add(currency_conversion)
     db.session.commit()
 
+# List all the conversions
+def list_currency_conversions():
+    conversions = CurrencyConversion.query.order_by(CurrencyConversion.id).all()
+    print(conversions)
+    return conversions
+
 with app.app_context():
     if not os.path.exists("currency_data.db"):
         db.create_all()

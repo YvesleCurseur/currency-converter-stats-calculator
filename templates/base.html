@@ -15,7 +15,23 @@
     {% endblock %}
   </head>
   <body>
-    <div id="content">{% block content %} <a href="/convert">Converter</a>. {% endblock %}</div>
+    <div id="content">
+      {% block content %}
+      <h1>Currency Converter Stats Calculator</h1>
+      <a href="/convert">Converter</a>
+      <p>Convert currencies for various transactions.</p>
+      <a href="/conversions">Conversions</a>
+      <p>View the list of all your conversions.</p>
+      <a href="/statistics">Statistics</a>
+      <p>
+        Access to standard deviation, average, maximum and minimum of all your
+        conversions.
+      </p>
+      <a href="/trends">Trends</a>
+      <p>Currency market trends base on all your conversions.</p>
+      {% endblock %}
+    </div>
+    <br>
     <div id="footer">
       {% block footer %} &copy; Copyright 2024 by
       <a href="http://domain.invalid/">Fulbert Pognon</a>. {% endblock %}
