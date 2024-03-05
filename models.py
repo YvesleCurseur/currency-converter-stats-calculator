@@ -5,8 +5,13 @@ from utils.currency_codes import get_currency_codes
 
 db = SQLAlchemy()
 
-db.init_app(app)  # Initialisez db après avoir créé l'application Flask
+db.init_app(app)  # Init db after run the app
 
+# ==============================================================
+# | Currency Model | List, Add, Get
+# ==============================================================
+
+# Currency Model
 class Currency(db.Model):
     __tablename__ = "currencies"
     id = db.Column(db.Integer, primary_key=True)
@@ -16,7 +21,7 @@ class Currency(db.Model):
     def __repr__(self):
         return f"{self.code} - {self.name}"
 
-
+# Add Currency
 def add_currency_data():
     currency_data = get_currency_codes()
     for code, name in currency_data["supported_codes"]:
@@ -26,7 +31,7 @@ def add_currency_data():
             db.session.add(currency)
     db.session.commit()
 
-
+# Get Currency by code
 def get_currency_name(code):
     currency = Currency.query.filter_by(code=code).first()
     if currency:
@@ -34,11 +39,16 @@ def get_currency_name(code):
     else:
         return "Currency not found"
 
-
+# List all the currencies
 def list_currency_codes():
     code = Currency.query.order_by(Currency.id).all()
     return code
 
+# ==============================================================
+# | Currency Conversion Model | List, Add
+# ==============================================================
+
+# Currency Conversion Model
 class CurrencyConversion(db.Model):
     __tablename__ = "currency_conversions"
     id = db.Column(db.Integer, primary_key=True)
@@ -51,6 +61,7 @@ class CurrencyConversion(db.Model):
     def __repr__(self):
         return f"<CurrencyConversion {self.base_code} to {self.target_code}>"
 
+# Add a currency conversion
 def add_currency_conversion_data(data):
     currency_conversion = CurrencyConversion(
         base_code=data["base_code"],
@@ -65,9 +76,9 @@ def add_currency_conversion_data(data):
 # List all the conversions
 def list_currency_conversions():
     conversions = CurrencyConversion.query.order_by(CurrencyConversion.id).all()
-    print(conversions)
     return conversions
 
+# Initialize the database once
 with app.app_context():
     if not os.path.exists("currency_data.db"):
         db.create_all()

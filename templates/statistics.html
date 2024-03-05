@@ -1,16 +1,10 @@
-{% comment %} 
-Heritage of all the element of the home page
-{% endcomment %} 
+{# Heritage of all the element of the home page #} 
 {% extends "base.html" %} 
 
-{% comment %} 
-Change the title of the page
-{% endcomment %}
+{# Change the title of the page #}
 {% block title %}Statistics{% endblock %} 
 
-{% comment %} 
-Change the content of the page
-{% endcomment %}
+{# Change the content of the page #}
 {% block content %}
 <h1 class="text-3xl font-bold mb-4">
   Statistics based on the amount and currency code
@@ -31,9 +25,7 @@ Change the content of the page
   </button>
 </form>
 
-{% comment %} 
-Display the stats of the currency enter
-{% endcomment %}
+{# Display the stats of the currency enter #}
 {% if stats %}
 <p>Code: {{ stats.currency_code }}</p>
 <p>Mean: {{ stats.mean }}</p>
@@ -57,9 +49,7 @@ Display the stats of the currency enter
     </tr>
   </thead>
   <tbody>
-    {% comment %} 
-    Display the data of the conversions
-    {% endcomment %}
+    {# Display the data of the conversions #}
     {% for conversion in conversions %}
     <tr>
       <td class="px-4 py-2">{{ conversion.from_amount }}</td>

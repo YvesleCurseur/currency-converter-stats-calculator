@@ -1,16 +1,10 @@
-{% comment %} 
-Heritage of all the element of the home page
-{% endcomment %} 
+{# Heritage of all the element of the home page #} 
 {% extends "base.html" %}
 
-{% comment %} 
-Change the title of the page
-{% endcomment %}
+{# Change the title of the page #}
 {% block title %}Currency Converter{% endblock %}
 
-{% comment %} 
-Change the content of the page
-{% endcomment %}
+{# Change the content of the page #}
 {% block content %}
 <h1 class="text-3xl font-bold mb-4 text-center">Currency Converter</h1>
 
@@ -27,9 +21,7 @@ Change the content of the page
     class="px-2 py-1 border border-gray-300 rounded-md mr-2 mt-5 mb-5"
   >
     <option value="" selected disabled>Select a currency</option>
-    {% comment %} 
-    Display all the code currencies from the data base    
-    {% endcomment %}
+    {# Display all the code currencies from the data base #}
     {% for code in codes %}
     <option value="{{ code.code }}">{{ code }}</option>
     {% endfor %}
@@ -39,9 +31,7 @@ Change the content of the page
     name="to_currency"
     class="px-2 py-1 border border-gray-300 rounded-md mr-2 mt-5 mb-5"
   >
-    {% comment %} 
-    Display all the code currencies from the data base & keep XOF ass the default one  
-    {% endcomment %}
+    {# Display all the code currencies from the data base & keep XOF ass the default one #}
     <option value="XOF">XOF - West African CFA franc</option>
     {% for code in codes %}
     <option value="{{ code.code }}">{{ code }}</option>
@@ -55,9 +45,7 @@ Change the content of the page
   </button>
 </form>
 
-{% comment %} 
-Display the result of the conversion
-{% endcomment %}
+{# Display the result of the conversion #}
 {% if result %}
 <p class="mb-4">
   The conversion from {{ result.from_amount }} {{ result.base_code }} to {{

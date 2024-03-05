@@ -3,19 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    {% comment %} Title of the page goes here {% endcomment %}
+    {# Title of the page goes here #}
     <title>
       {% block title %} Home {% endblock %} - Currency Converter Stats
       Calculator
     </title>
-    {% comment %} 
-    Tailwind CSS online import in case the install not work
-    {% endcomment %}
+    {# Tailwind CSS online import in case the install not work #}
     <link
       href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
       rel="stylesheet"
     />
-    {% comment %} CSS file link to static folder {% endcomment %}
+    {# CSS file link to static folder #}
     <link
       rel="stylesheet"
       href="{{url_for('static', filename='css/output.css')}}"
@@ -29,9 +27,7 @@
           Currency Converter Stats Calculator
         </a>
       </h1>
-      {% comment %} 
-      The content of the page that will be switching start here 
-      {% endcomment %} 
+      {# The content of the page that will be switching start here #} 
       {% block content %}
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div class="p-4 bg-white rounded-lg shadow">
@@ -76,9 +72,7 @@
     </div>
 
     <footer class="text-center py-4 mt-8">
-      {% comment %} 
-      The footer of the page that will be switching start here 
-      {% endcomment %} 
+      {# The footer of the page that will be switching start here #}
       {% block footer %} &copy; By
       <a
         href="https://github.com/YvesleCurseur"

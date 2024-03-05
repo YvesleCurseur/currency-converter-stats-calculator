@@ -38,16 +38,20 @@ def calculate_statistics_for_currency(currency_code):
     else:
         return None
 
-# Fonction pour comparer les statistiques des différentes devises
 def compare_statistics_for_currencies():
-    # Récupérer la liste des devises disponibles dans la base de données
+    """Compare the statistics of all amount converted for each currency
+
+    Returns:
+        dict: Dict of currency_code, mean, standard_deviation, maximum, minimum
+    """
+    # Get the amounts converted for each currency specified from the db
     currency_codes = db.session.query(CurrencyConversion.target_code).distinct().all()
     currency_codes = [code[0] for code in currency_codes]
 
-    # Initialiser un dictionnaire pour stocker les statistiques de chaque devise
+    # Init a dictionary to store the statistics of each currency
     currency_statistics = {}
 
-    # Calculer les statistiques pour chaque devise
+    # Calculate the statistics for each currency
     for currency_code in currency_codes:
         stats = calculate_statistics_for_currency(currency_code)
         if stats:
@@ -56,37 +60,36 @@ def compare_statistics_for_currencies():
     return currency_statistics
 
 
-# Fonction pour calculer les moyennes des montants convertis pour chaque devise sur l'ensemble des données disponibles
 def calculate_mean_conversion_amounts_by_currency():
-    """_summary_
+    """Calculate the mean conversion amounts for each currency
 
     Returns:
-        _type_: _description_
+        dict & str: Dict of average conversion amounts and trend messages
     """
     currency_averages = {}
     trend_messages = {}
 
-    # Récupérer la liste des devises disponibles dans la base de données
+    # Get the list of currency codes
     currency_codes = db.session.query(CurrencyConversion.target_code).distinct().all()
     currency_codes = [code[0] for code in currency_codes]
 
     for currency_code in currency_codes:
-        # Récupérer les montants convertis pour la devise spécifiée
+        # Get the amounts converted for each currency
         conversion_results = CurrencyConversion.query.filter_by(
             target_code=currency_code
         ).all()
 
-        # Extraire les montants convertis
+        # Extract the amount converted
         converted_amounts = [
             conversion.conversion_result for conversion in conversion_results
         ]
 
-        # Calculer la moyenne des montants convertis
+        # Calculate the mean
         if converted_amounts:
             average = np.mean(converted_amounts)
             currency_averages[currency_code] = average
 
-            # Déterminer la tendance
+            # Get the trend
             if len(converted_amounts) >= 2:
                 if converted_amounts[-1] > converted_amounts[-2]:
                     trend_messages[currency_code] = "Rise"

@@ -1,26 +1,16 @@
-{% comment %} 
-Heritage of all the element of the home page
-{% endcomment %} 
+{# Heritage of all the element of the home page #} 
 {% extends "base.html" %}
 
-{% comment %} 
-Change the title of the page
-{% endcomment %}
+{# Change the title of the page #}
 {% block title %}Conversions - Trends{% endblock %}
 
-{% comment %} 
-Change the content of the page
-{% endcomment %}
+{# Change the content of the page #}
 {% block content %}
-{% comment %} 
-Display trends if there is somes conversions done else display "No trends available, please do some conversions."
-{% endcomment %}
+{# Display trends if there is somes conversions done else display "No trends available, please do some conversions." #}
   {% if trends %}
     <h2 class="text-2xl font-bold mb-2">Trends</h2>
     <ul>
-      {% comment %} 
-      Display a currencies of conversions and the trend value associated
-      {% endcomment %}
+      {# Display a currencies of conversions and the trend value associated #}
       {% for currency_code, trend in trends.items() %}
         <li>{{ currency_code }}: {{ trend }}</li>
       {% endfor %}
@@ -29,15 +19,11 @@ Display trends if there is somes conversions done else display "No trends availa
     <p>No trends available, please do some conversions.</p>
   {% endif %}
 
-  {% comment %} 
-  Display currency comparison stats if there is somes conversions done else display "No currency comparison statistics available, please do some conversions."
-  {% endcomment %}
+  {# Display currency comparison stats if there is somes conversions done else display "No currency comparison statistics available, please do some conversions." #}
   {% if currency_comparison_stats %}
     <h2 class="text-2xl font-bold mb-2">Currency Comparison Statistics</h2>
     <ul>
-      {% comment %} 
-      Display currency comparison stats of each currency, mean, standard deviation, maximum, minimum"
-      {% endcomment %}
+      {# Display currency comparison stats of each currency, mean, standard deviation, maximum, minimum" #}
       {% for currency_code, stats in currency_comparison_stats.items() %}
         <li>
           <p class="font-bold">{{ currency_code }}:</p>
@@ -54,9 +40,7 @@ Display trends if there is somes conversions done else display "No trends availa
     <p>No currency comparison statistics available, please do some conversions.</p>
   {% endif %}
 
-  {% comment %} 
-  Display the mean of all the conversions amount done by a currency
-  {% endcomment %}
+  {# Display the mean of all the conversions amount done by a currency #}
   {% if mean_conversion_amounts %}
     <h2 class="text-2xl font-bold mb-2">Average Conversion Amounts</h2>
     <ul>
