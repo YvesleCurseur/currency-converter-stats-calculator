@@ -17,7 +17,7 @@ from models import (
 from utils.statistics import (
     calculate_statistics_for_currency, 
     compare_statistics_for_currencies, 
-    calculate_average_conversion_amounts_by_currency)
+    calculate_mean_conversion_amounts_by_currency)
 
 import requests
 
@@ -109,17 +109,17 @@ def trends():
     print("Currency Comparison Statistics:", currency_comparison_stats)
 
     # Exemple d'utilisation : Calculer les moyennes des montants convertis et les tendances pour chaque devise sur l'ensemble des données disponibles
-    average_conversion_amounts, trend_messages = calculate_average_conversion_amounts_by_currency()
+    mean_conversion_amounts, trend_messages = calculate_mean_conversion_amounts_by_currency()
 
     # Affichage des moyennes des montants convertis pour chaque devise
-    print("Average Conversion Amounts:", average_conversion_amounts)
+    print("Average Conversion Amounts:", mean_conversion_amounts)
 
     # Affichage des tendances des montants convertis pour chaque devise
     print("Trend Messages:")
     for currency_code, trend in trend_messages.items():
         print(f"- {currency_code} : {trend}")
 
-    return render_template("trends.html", trends=trend_messages, currency_comparison_stats=currency_comparison_stats, average_conversion_amounts=average_conversion_amounts)
+    return render_template("trends.html", trends=trend_messages, currency_comparison_stats=currency_comparison_stats, mean_conversion_amounts=mean_conversion_amounts)
 
 
 # Statistics for XOF: {'currency_code': 'XOF', 'mean': 363606.78, 'standard_deviation': 363421.62, 'maximum': 727028.4, 'minimum': 185.16}   

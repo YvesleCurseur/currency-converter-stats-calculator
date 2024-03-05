@@ -13,8 +13,7 @@ __pycache__/
 *.py[cod]
 *$py.class
 
-node_modules/
-currency_data.db
+
 
 # C extensions
 *.so
@@ -171,3 +170,8 @@ cython_debug/
 #.idea/
 
 # End of https://www.toptal.com/developers/gitignore/api/flask
+
+node_modules/
+.currency_data.db
+currency_data.db/
+/currency_data.db

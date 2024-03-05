@@ -1,32 +1,43 @@
+{% comment %} 
+Heritage of all the element of the home page
+{% endcomment %} 
 {% extends "base.html" %}
 
+{% comment %} 
+Change the title of the page
+{% endcomment %}
 {% block title %}Conversions - Trends{% endblock %}
 
-{% block head %}
-  {{ super() }}
-  <style type="text/css">
-    .important {
-      color: #336699;
-    }
-  </style>
-{% endblock %}
-
+{% comment %} 
+Change the content of the page
+{% endcomment %}
 {% block content %}
-
+{% comment %} 
+Display trends if there is somes conversions done else display "No trends available, please do some conversions."
+{% endcomment %}
   {% if trends %}
     <h2 class="text-2xl font-bold mb-2">Trends</h2>
     <ul>
+      {% comment %} 
+      Display a currencies of conversions and the trend value associated
+      {% endcomment %}
       {% for currency_code, trend in trends.items() %}
         <li>{{ currency_code }}: {{ trend }}</li>
       {% endfor %}
     </ul>
   {% else %}
-    <p>No trends available.</p>
+    <p>No trends available, please do some conversions.</p>
   {% endif %}
 
+  {% comment %} 
+  Display currency comparison stats if there is somes conversions done else display "No currency comparison statistics available, please do some conversions."
+  {% endcomment %}
   {% if currency_comparison_stats %}
     <h2 class="text-2xl font-bold mb-2">Currency Comparison Statistics</h2>
     <ul>
+      {% comment %} 
+      Display currency comparison stats of each currency, mean, standard deviation, maximum, minimum"
+      {% endcomment %}
       {% for currency_code, stats in currency_comparison_stats.items() %}
         <li>
           <p class="font-bold">{{ currency_code }}:</p>
@@ -40,13 +51,16 @@
       {% endfor %}
     </ul>
   {% else %}
-    <p>No currency comparison statistics available.</p>
+    <p>No currency comparison statistics available, please do some conversions.</p>
   {% endif %}
 
-  {% if average_conversion_amounts %}
+  {% comment %} 
+  Display the mean of all the conversions amount done by a currency
+  {% endcomment %}
+  {% if mean_conversion_amounts %}
     <h2 class="text-2xl font-bold mb-2">Average Conversion Amounts</h2>
     <ul>
-      {% for currency_code, amount in average_conversion_amounts.items() %}
+      {% for currency_code, amount in mean_conversion_amounts.items() %}
         <li>{{ currency_code }}: {{ amount }} - Average amount of conversions for {{ currency_code }}.</li>
       {% endfor %}
     </ul>

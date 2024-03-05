@@ -1,11 +1,17 @@
-{% extends "base.html" %} {% block title %}Statistics{% endblock %} {% block
-head %} {{ super() }}
-<style type="text/css">
-  .important {
-    color: #336699;
-  }
-</style>
-{% endblock %} {% block content %}
+{% comment %} 
+Heritage of all the element of the home page
+{% endcomment %} 
+{% extends "base.html" %} 
+
+{% comment %} 
+Change the title of the page
+{% endcomment %}
+{% block title %}Statistics{% endblock %} 
+
+{% comment %} 
+Change the content of the page
+{% endcomment %}
+{% block content %}
 <h1 class="text-3xl font-bold mb-4">
   Statistics based on the amount and currency code
 </h1>
@@ -25,6 +31,9 @@ head %} {{ super() }}
   </button>
 </form>
 
+{% comment %} 
+Display the stats of the currency enter
+{% endcomment %}
 {% if stats %}
 <p>Code: {{ stats.currency_code }}</p>
 <p>Mean: {{ stats.mean }}</p>
@@ -48,6 +57,9 @@ head %} {{ super() }}
     </tr>
   </thead>
   <tbody>
+    {% comment %} 
+    Display the data of the conversions
+    {% endcomment %}
     {% for conversion in conversions %}
     <tr>
       <td class="px-4 py-2">{{ conversion.from_amount }}</td>

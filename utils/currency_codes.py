@@ -1,13 +1,11 @@
-# utils/currency_codes.py
-
 import os
 import requests
-import numpy as np
 
-from dotenv import load_dotenv
+# Import and loading env variable
 
-load_dotenv()
-
+# Delete
+# from dotenv import load_dotenv
+# load_dotenv()
 EXCHANGE_API_KEY = os.getenv("EXCHANGE_API_KEY")
 
 def get_currency_codes():
