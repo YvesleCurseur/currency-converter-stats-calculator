@@ -59,7 +59,6 @@ def compare_statistics_for_currencies():
 
     return currency_statistics
 
-
 def calculate_mean_conversion_amounts_by_currency():
     """Calculate the mean conversion amounts for each currency
 
