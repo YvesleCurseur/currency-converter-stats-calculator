@@ -12,8 +12,8 @@ This guide provides step-by-step instructions for setting up the development env
 
 ## Prerequisites
 Before you begin, ensure you have the following software installed on your system:
-- Python
-- Node.js and npm
+- [Python](https://www.python.org/)
+- [Node.js](https://nodejs.org/en) and npm
 - Git
 
 ## Getting Started
