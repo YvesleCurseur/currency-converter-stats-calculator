@@ -1,4 +1,5 @@
 # currency-converter-stats-calculator
+
 Web Application to Convert Currencies and Perform Calculations Statistics
 
 # Engineering Department Codebase Setup Guide
@@ -6,21 +7,23 @@ Web Application to Convert Currencies and Perform Calculations Statistics
 This guide provides step-by-step instructions for setting up the development environment for the Engineering department's codebase. The codebase utilizes Python with Flask for the backend and Tailwind CSS for the frontend.
 
 ## Prerequisites
+
 Before you begin, ensure you have the following software installed on your system:
+
 - [Python](https://www.python.org/)
 - [Node.js](https://nodejs.org/en)
 - [Git](https://git-scm.com/)
 
 ## Getting Started
 
-### Clone the Repository (Optional) 
+### Clone the Repository (Optional)
+
 1. Open a terminal or command prompt.
 2. Navigate to the directory where you want to store the codebase.
 3. Run the following command to clone the repository:
    ```
    git clone https://github.com/YvesleCurseur/currency-converter-stats-calculator.git
    ```
-
 
 ### Directory Structure (Before Setup the App)
 
@@ -61,7 +64,9 @@ currency-converter-stats-calculator/
 ├── requirements.txt
 └── tailwind.config.js
 ```
+
 In this structure:
+
 - `static/`: Directory for static files like CSS.
 - `templates/`: Directory for HTML templates.
 - `utils/`: Directory for utility modules or functions.
@@ -76,12 +81,17 @@ In this structure:
 - `README.md`: Project documentation.
 
 ### Create a Virtual Environment
+
 1. Navigate to the root directory of the cloned repository.
 2. Run the following command to create a virtual environment:
    ```
    python -m venv venv
    ```
 3. Activate the virtual environment:
+   ```
+   .\venv\Scripts\activate
+   ```
+   or
    ```
    source venv/bin/activate
    ```
@@ -93,22 +103,25 @@ This application utilizes environment variables for configuration.
 Change the `env.example` to a `.env` file in the root directory. Add the following variables:
 
 Ensure the following environment variables are set:
-   ```
-   FLASK_APP=app
-   ENV=DEVELOPEMENT
-   FLASK_DEBUG=True
 
-   # Amdoren Currency Converter
-   EXCHANGE_API_KEY="Your API key for accessing the ExchangeRate-API."
-   EXCHANGE_URL="https://v6.exchangerate-api.com/v6"
-   ```
+```
+FLASK_APP=app
+ENV=DEVELOPEMENT
+FLASK_DEBUG=True
+
+# Amdoren Currency Converter
+EXCHANGE_API_KEY="Your API key for accessing the ExchangeRate-API."
+EXCHANGE_URL="https://v6.exchangerate-api.com/v6"
+```
 
 Use the API key from the ExchangeRate-API by [signing up](https://app.exchangerate-api.com/sign-in) for an account or use this one here:
-   ```
-   9328d7790738eab570d5c8a4
-   ```
+
+```
+9328d7790738eab570d5c8a4
+```
 
 ### Install Dependencies
+
 1. Navigate to the root directory of the cloned repository.
 2. Install Python dependencies:
    ```
@@ -120,17 +133,21 @@ Use the API key from the ExchangeRate-API by [signing up](https://app.exchangera
    ```
 
 ### Running the Codebase
-1. Start the Flask app by running:
-   ```
-   flask run
-   ```
-2. To enable the Tailwind CSS style, build the CSS file:
+
+1. To enable the Tailwind CSS style, build the CSS file:
    ```
    npm run buildcss
    ```
+2. Start the Flask app by running:
+   ```
+   flask run
+   ```
 3. Navigate to http://127.0.0.1:5000 in your browser.
+   In your terminal, you should see the following output:
+   ![Flask Terminal](screenshots/flask-terminal.png)
 
-#### Note: 
+#### Note:
+
 In the directory of the codebase, you should be able to see a `currency_data.db` appearing.
 
 ### Directory Structure (After Launching the App)
@@ -162,7 +179,7 @@ currency-converter-stats-calculator/
 │   └── trends.html
 |
 ├── venv/
-│   
+│
 ├── .env
 ├── .gitignore
 ├── app.py
@@ -177,6 +194,7 @@ currency-converter-stats-calculator/
 ```
 
 ## Troubleshooting
+
 - **Dependency Issues**: Ensure correct versions of Python and Node.js/npm are installed. Check `requirements.txt` and `package.json` for correct dependencies.
 - **Flask App Not Running**: Check for missing dependencies or incorrect configurations in the Flask application.
 - **Tailwind CSS Build Error**: Verify paths in `tailwind.config.js` for input and output files.
@@ -196,3 +214,13 @@ This function compares the statistics of all amounts converted for each currency
 3. `calculate_mean_conversion_amounts_by_currency()`
 
 This function calculates the mean conversion amounts for each currency and provides trend messages indicating whether the conversion amounts are rising, dropping, or stable.
+
+## Additional Information
+
+Here some screenshots of the application:
+
+![Home](screenshots/Home.png)
+![Conversion](screenshots/conversion.png)
+![List of Conversions](screenshots/list-conversions.png)
+![Statistics](screenshots/statistics.png)
+![Trends](screenshots/trends.png)
