@@ -30,6 +30,8 @@ Before you begin, ensure you have the following software installed on your syste
 ```
 currency-converter-stats-calculator/
 │
+├── screenshots/
+│
 └── static/
 |   └── css
 |       └── input.css
@@ -67,6 +69,8 @@ currency-converter-stats-calculator/
 
 In this structure:
 
+- `currency-converter-stats-calculator/`: Directory for the codebase.
+- `screenshots/`: Directory for screenshots.
 - `static/`: Directory for static files like CSS.
 - `templates/`: Directory for HTML templates.
 - `utils/`: Directory for utility modules or functions.
@@ -154,6 +158,8 @@ In the directory of the codebase, you should be able to see a `currency_data.db`
 
 ```
 currency-converter-stats-calculator/
+│
+├── screenshots/
 │
 └── static/
 |   └── css
