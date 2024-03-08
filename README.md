@@ -2,9 +2,8 @@
 
 Web Application to Convert Currencies and Perform Calculations Statistics
 
-# Engineering Department Codebase Setup Guide
-
-This guide provides step-by-step instructions for setting up the development environment for the Engineering department's codebase. The codebase utilizes Python with Flask for the backend and Tailwind CSS for the frontend.
+## Introduction
+This guide provides step-by-step instructions for setting up the development environment. The codebase utilizes Python with Flask for the backend and Tailwind CSS for the frontend.
 
 ## Prerequisites
 
