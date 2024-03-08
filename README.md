@@ -147,7 +147,9 @@ Use the API key from the ExchangeRate-API by [signing up](https://app.exchangera
    flask run
    ```
 3. Navigate to http://127.0.0.1:5000 in your browser.
+
    In your terminal, you should see the following output:
+
    ![Flask Terminal](screenshots/flask-terminal.png)
 
 #### Note:
@@ -225,8 +227,17 @@ This function calculates the mean conversion amounts for each currency and provi
 
 Here some screenshots of the application:
 
-![Home](screenshots/Home.png)
+Home Page
+![Home](screenshots/home.png)
+
+Conversion Page
 ![Conversion](screenshots/conversion.png)
+
+List of Conversions Page
 ![List of Conversions](screenshots/list-conversions.png)
+
+Statistics Page
 ![Statistics](screenshots/statistics.png)
+
+Trends Page
 ![Trends](screenshots/trends.png)
