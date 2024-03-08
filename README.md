@@ -120,7 +120,7 @@ EXCHANGE_URL="https://v6.exchangerate-api.com/v6"
 Use the API key from the ExchangeRate-API by [signing up](https://app.exchangerate-api.com/sign-in) for an account or use this one here:
 
 ```
-9328d7790738eab570d5c8a4
+93...
 ```
 
 ### Install Dependencies
